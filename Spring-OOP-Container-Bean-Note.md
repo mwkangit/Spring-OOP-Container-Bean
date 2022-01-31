@@ -28,9 +28,9 @@
 
 - ### 다형성과 SOLID를 반영하기 위해 각 객체는 인터페이스로 형성 후 상속하여 클래스로 구현한다.
 
-![Member Domain Relation](https://user-images.githubusercontent.com/79822924/138109532-bec6ac10-e6bc-4de2-849c-2f27f08dde06.png)
+![Member Domain Relation](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Member Domain Relation.png)
 
-![Member Class Diagram](https://user-images.githubusercontent.com/79822924/138109560-fe4de46e-5a02-4998-9aa0-363605d041b8.png)
+![Member Class Diagram](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Member Class Diagram.png)
 
 - #### Member 도메인과 클래스 다이어그램을 통해 member의 다형성을 확보하기 위해 여러개의 인터페이스와 클래스로 나누었다.
 
@@ -73,15 +73,12 @@ public class Member {
         this.grade = grade;
     }
 }
-
 ```
-
-
 
 ```java
 public class MemoryMemberRepository implements MemberRepository{
 
-    // 원래 concurrent HashMap 사용해야 한다
+    // 원래 ConcurrentHashMap 사용해야 한다
     private static Map<Long, Member> store = new HashMap<>();
 
     @Override
@@ -94,10 +91,7 @@ public class MemoryMemberRepository implements MemberRepository{
         return store.get(memberId);
     }
 }
-
 ```
-
-
 
 ```java
 public class MemberServiceImpl implements MemberService{
@@ -117,7 +111,6 @@ public class MemberServiceImpl implements MemberService{
         return memberRepository.findById(memberId);
     }
 }
-
 ```
 
 - #### 인터페이스를 생성하여 어떠한 기능을 사용할 것인지 명시한 뒤 데이터를 다루는 repository와 client가 접근 할 service를 나누어서 프로그래밍 하였다.
@@ -128,9 +121,9 @@ public class MemberServiceImpl implements MemberService{
 
 
 
-![Order Domain](https://user-images.githubusercontent.com/79822924/138109616-4635ba99-63ec-43bb-9627-60bb00364149.png)
+![Order Domain](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Order Domain.png)
 
-![Order Class Diagram](https://user-images.githubusercontent.com/79822924/138109651-6a99ae61-2f6a-4845-babe-be13d4f3c1e7.png)
+![Order Class Diagram](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Order Class Diagram.png)
 
 - #### Order 도메인과 클래스 다이어그램을 통해 사용할 메소드를 지정하여 다형성을 확보하였다.
 
@@ -198,10 +191,7 @@ public class Order {
                 '}';
     }
 }
-
 ```
-
-
 
 ```java
 public class OrderServiceImpl implements OrderService{
@@ -218,10 +208,7 @@ public class OrderServiceImpl implements OrderService{
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }
 }
-
 ```
-
-
 
 ```java
 public class FixDiscountPolicy implements DiscountPolicy{
@@ -238,7 +225,6 @@ public class FixDiscountPolicy implements DiscountPolicy{
         }
     }
 }
-
 ```
 
 ```java
@@ -255,7 +241,6 @@ public class RateDiscountPolicy implements DiscountPolicy {
         }
     }
 }
-
 ```
 
 - #### Order에 toString() 메소드를 적용하여 내부의 데이터를 모두 출력할 수 있게 하였다.
@@ -264,7 +249,7 @@ public class RateDiscountPolicy implements DiscountPolicy {
 
 
 
-![DIP, OCP 불충분](https://user-images.githubusercontent.com/79822924/138109708-600fcc48-7996-4ac0-bb3f-51934b61a4cb.png)
+![DIP, OCP 불충분](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/DIP, OCP 불충분.png)
 
 ```java
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -298,7 +283,9 @@ public class RateDiscountPolicy implements DiscountPolicy {
 
 - ### Application의 전체 동작 방식을 구성하기 위해, 구현 객체를 생성하고, 연결하는 책임을 가지는 별도의 설정 클래스인 AppConfig를 생성한다.(구성 및 설정 클래스)
 
-![AppConfig 생성자 주입](https://user-images.githubusercontent.com/79822924/138109786-41c959c5-e469-4efc-90d9-d29be6dc3f2f.png)
+
+
+![AppConfig 생성자 주입](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/AppConfig 생성자 주입.png)
 
 ```java
 public class AppConfig {
@@ -340,8 +327,6 @@ public class MemberServiceImpl implements MemberService{
 }
 ```
 
-
-
 ```java
 // OrderServiceImpl 생성자 주입을 위한 생성자 추가
 public class OrderServiceImpl implements OrderService{
@@ -372,7 +357,7 @@ public class OrderServiceImpl implements OrderService{
 
 - #### Config 클래스 또한 refactoring하여 역할에 따른 구현이 잘 보일 수 있게 해야한다.(중복 제거 후 변경에 용이하게 한다)
 
-![사용, 구성 영역](https://user-images.githubusercontent.com/79822924/138109863-90c2148b-1841-479d-a533-74c12cce41a1.png)
+![사용, 구성 영역](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/사용, 구성 영역.png)
 
 - #### AppConfig로 application이 사용 영역과 객체를 생성하고 구성하는 영역으로 분리되었다.
 
@@ -516,7 +501,8 @@ public class OrderApp {
 - #### AnnotationConfigApplicationContext는  java annotation기반  config설정으로 spring bean을 만든다는 뜻이다.
 
 
-![스프링빈등록](https://user-images.githubusercontent.com/79822924/138466945-aee3344e-7c76-4d46-a72f-820e5c56ea15.png)
+
+![스프링빈등록](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/스프링빈등록.png)
 
 - #### 형성된 스프링 컨테이너에 key, value형태로 빈을 등록한다.
 
@@ -525,8 +511,8 @@ public class OrderApp {
 - #### 빈 객체는 value로 반환하는 값이 들어간다.
 
 
-![스프링빈의존관계완료](https://user-images.githubusercontent.com/79822924/138466978-6a05b33b-d2aa-47c6-b5b7-aa6716e497c7.png)
 
+![스프링빈의존관계완료](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/스프링빈의존관계완료.png)
 
 - #### 스프링 컨테이너는 설정 정보를 참고하여 의존관계(DI)를 주입한다.
 
@@ -560,7 +546,7 @@ public class OrderApp {
 
 - #### getBeanOfType()을 사용하면 해당 타입의 모든 빈을 조회할 수 있다.
 
-- #### 스프링 비은 상속관계를 반영하여 부모 타입으로 조회하면 자식 타입도 함께 조회한다. 즉, object 타입으로 조회하면 모든 스프링 빈을 조회한다.
+- #### 스프링 빈은 상속관계를 반영하여 부모 타입으로 조회하면 자식 타입도 함께 조회한다. 즉, object 타입으로 조회하면 모든 스프링 빈을 조회한다.
 
 - #### 빈에 등록할 때에는 인터페이스를 반환하는 것이 의존관계 생성 시 유용하다.
 
@@ -570,13 +556,13 @@ public class OrderApp {
 
 
 
-![ApplicationContext설정사용](https://user-images.githubusercontent.com/79822924/138467018-1a13ceb5-b16a-4814-9626-35f8696cd138.png)
+![ApplicationContext설정사용](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/ApplicationContext설정사용.png)
 
 - #### ApplicationContext에 java, XML, 임의로 제작한 설정을 사용하여 빈 등록을 하여 이용할 수 있다.
 
 
 
-![BeanDefinition](https://user-images.githubusercontent.com/79822924/138467043-a582ddf4-4ece-4539-8c1d-7418edf20f49.png)
+![BeanDefinition](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/BeanDefinition.png)
 
 - #### 스프링 컨테이너는 BeanDefinition을 통해 메타정보를 기반으로 스프링 빈을 생성한다. 스프링 컨테이너는 BeanDefinition을 상속받아서 역할과 구현을 나눴다. 즉, 스프링 컨테이너는 설정정보가 java인지 XML인지 알 필요없이 BeanDefinition을 통해 정보를 인지하면 된다.
 
@@ -672,7 +658,7 @@ public class SingletonService {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
     
-        @Bean
+    @Bean
     public MemberRepository memberRepository() {
         System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
@@ -690,8 +676,6 @@ public class SingletonService {
         System.out.println("bean = " + bean.getClass());
     }
 ```
-
-
 
 - #### 스프링은 클래스의 바이트코드를 조작하는 라이브러리를 이용하여 싱글톤에 적용한다.
 
@@ -745,7 +729,7 @@ public class OrderServiceImpl implements OrderService{
 
 
 
-![Autowired](https://user-images.githubusercontent.com/79822924/138467093-b160b7c7-0c51-4a3c-8fe9-7a30169279f0.png)
+![Autowired](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/Autowired.png)
 
 - #### @Autowired를 생성자에 지정하면 스프링 컨테이너가 자동으로 해당 스프링 빈을 찾아서 의존관계를 주입한다. 이때 기본 조회 전략은 타입이 같은 빈을 찾아서 주입하는 것이며 getBean(반환 클래스 타입)과 같은 의미이다.
 
@@ -799,7 +783,6 @@ public class BeanB {
                 @Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class),
                 @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = BeanA.class)
             }
-        
     )
     static class ComponentFilterAppConfig{
     }
@@ -925,7 +908,7 @@ public class OrderServiceImpl implements OrderService {
 
 - #### 주로 테스트 코드나 스프링 설정을 목적으로 하는 @Configuration 같은 곳에서 사용한다.
 
-- #### @SpringBootTest를 이용하여 스프링 컨테이너를 테스트에 통합하여 @Autowired를 자유롭게 사용할 수 있다. @SpringBootTest는 자동으로 스프링 컨테이너에 테스트 토합하여 사용한다.
+- #### @SpringBootTest를 이용하여 스프링 컨테이너를 테스트에 통합하여 @Autowired를 자유롭게 사용할 수 있다. @SpringBootTest는 자동으로 스프링 컨테이너에 테스트 통합하여 사용한다.
 
 
 
@@ -1002,7 +985,7 @@ dependencies{
 }
 ```
 
-- #### Lombok은 객체에 대한 getter, setter을 자동으로 생성하는 어노테이션을 제공하는 동시에 @RequiredArgsConstructor을 통해 생성자 주입을 간편하게 구현할 수 있게 한다. 즉, lombok은 자바의 어노테이션 프로세서 기능을 이용하여 컴파일 시점에 생성자 코드를 자동을 생성한다. 실제 클래스를 열어보면 생성자가 만들어진 것을 확인 할 수 있다.
+- #### Lombok은 객체에 대한 getter, setter을 자동으로 생성하는 어노테이션을 제공하는 동시에 @RequiredArgsConstructor을 통해 생성자 주입을 간편하게 구현할 수 있게 한다. 즉, lombok은 자바의 어노테이션 프로세서 기능을 이용하여 컴파일 시점에 생성자 코드를 자동으로 생성한다. 실제 클래스를 열어보면 생성자가 만들어진 것을 확인 할 수 있다.
 
 - #### Gradle에 dependencies를 추가하면 lombok을 이용할 수 있다.
 
@@ -1325,13 +1308,13 @@ static class LifeCycleConfig {
 
 
 
-![prototypebean1](https://user-images.githubusercontent.com/79822924/139865663-3f9fbf32-57a8-41df-ad7a-ac9a7b8f5ed4.png)
+![prototypebean1](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/prototypebean1.png)
 
 - #### 스프링 컨테이너는 요청한 빈에 대해 의존관계 주입, 초기화 단계까지 관리한다.
 
 
 
-![prototypebean2](https://user-images.githubusercontent.com/79822924/139865699-7abf2503-c1a4-44aa-b97e-1e153ff60b4d.png)
+![prototypebean2](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/prototypebean2.png)
 
 - #### 과정을 마친 빈을 client에 반환하지만 요청이 오면 항상 새로운 프로토타입 빈을 생성해서 반환한다.
 
@@ -1364,35 +1347,38 @@ static class LifeCycleConfig {
 
 ```java
 static class ClientBean {
-    private final PrototypeBean prototypeBean;
-    @Autowired
-    public ClientBean(PrototypeBean prototypeBean) {
-        this.prototypeBean = prototypeBean;
-    }
-    public int logic() {
-        prototypeBean.addCount();
-        int count = prototypeBean.getCount();
-        return count;
-    }
+private final PrototypeBean prototypeBean;
+	@Autowired
+	public ClientBean(PrototypeBean prototypeBean) {
+		this.prototypeBean = prototypeBean;
+	}
+	public int logic() {
+		prototypeBean.addCount();
+		int count = prototypeBean.getCount();
+		return count;
+	}
 }
 
-@Scope("prototype")static class PrototypeBean {
-    private int count = 0;
+@Scope("prototype")
+static class PrototypeBean {
+	private int count = 0;
+	
     public void addCount() {
-        count++;	
-    }
-    public int getCount() {
-        return count;	
-    }
+        count++;
+	}
     
+	public int getCount() {
+		return count;
+	}
+	
     @PostConstruct
-    public void init() {
-        System.out.println("PrototypeBean.init " + this);
-    }
-    
-    @PreDestroy	public void destroy() {	
-        System.out.println("PrototypeBean.destroy");
-    }
+	public void init() {
+		System.out.println("PrototypeBean.init " + this);
+	}
+	@PreDestroy
+	public void destroy() {
+		System.out.println("PrototypeBean.destroy");
+	}
 }
 ```
 
@@ -1406,14 +1392,14 @@ static class ClientBean {
 
 ```java
 static class ClientBean {
-    @Autowired
-    private ApplicationContext ac;
-    public int logic() {
-        PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
-        prototypeBean.addCount();
-        int count = prototypeBean.getCount();
-        return count;
-    }
+	@Autowired
+	private ApplicationContext ac;
+	public int logic() {
+		PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
+		prototypeBean.addCount();
+		int count = prototypeBean.getCount();
+		return count;
+	}
 }
 ```
 
@@ -1429,11 +1415,11 @@ static class ClientBean {
 	@Autowired
 	private ObjectProvider<PrototypeBean> prototypeBeanProvider;
 	public int logic() {
-        PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
-        prototypeBean.addCount();
-        int count = prototypeBean.getCount();
-        return count;
-    }
+		PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+		prototypeBean.addCount();
+		int count = prototypeBean.getCount();
+		return count;
+	}
 ```
 
 - #### ObjectProvider의 getObject()는 스프링 컨테이너를 통해 해당 빈을 찾아서 반환하는 DL을 실행한다.
@@ -1449,13 +1435,12 @@ static class ClientBean {
 ```java
 	@Autowired
 	private Provider<PrototypeBean> provider;
-	
 	public int logic() {
-    PrototypeBean prototypeBean = provider.get();
-    prototypeBean.addCount();
-    int count = prototypeBean.getCount();
-    return count;
-}
+			PrototypeBean prototypeBean = provider.get();
+			prototypeBean.addCount();
+			int count = prototypeBean.getCount();
+			return count;
+	}
 ```
 
 ```groovy
@@ -1474,7 +1459,7 @@ implementation 'javax.inject:javax.inject:1'
 
 
 
-![web_scope](https://user-images.githubusercontent.com/79822924/139865755-10cf38e5-69bb-4b74-b554-22544618cebf.png)
+![web_scope](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/web_scope.png)
 
 - #### 웹 스코프는 웹환경에서만 동작하며 스프링이 해당 스코프의 종료시점까지 관리하여 소멸 메소드가 호출된다.
 
@@ -1514,24 +1499,24 @@ server.port=9090
 @Component
 @Scope(value = "request")
 public class MyLogger {
-    private String uuid;
-    private String requestURL;
-    public void setRequestURL(String requestURL) {
-        this.requestURL = requestURL;
-    }
-    
-    public void log(String message) {
-        System.out.println("[" + uuid + "]" + "[" + requestURL + "] " + message);
-    }
-    @PostConstruct
+	private String uuid;
+	private String requestURL;
+	public void setRequestURL(String requestURL) {
+		this.requestURL = requestURL;
+	}
+	public void log(String message) {
+		System.out.println("[" + uuid + "]" + "[" + requestURL + "] " + message);
+	}
+	@PostConstruct
     public void init() {
-        uuid = UUID.randomUUID().toString();
-        System.out.println("[" + uuid + "] request scope bean create:" + this);
-    }
+		uuid = UUID.randomUUID().toString();
+		System.out.println("[" + uuid + "] request scope bean create:" + this);
+	}
     
-    @PreDestroy	public void close() {
-        System.out.println("[" + uuid + "] request scope bean close:" + this);
-    }
+	@PreDestroy
+	public void close() {
+		System.out.println("[" + uuid + "] request scope bean close:" + this);
+	}
 }
 ```
 
@@ -1540,16 +1525,17 @@ public class MyLogger {
 @RequiredArgsConstructor
 public class LogDemoController {
     private final LogDemoService logDemoService;
-    private final MyLogger myLogger;
-    @RequestMapping("log-demo")	
-    @ResponseBody	
-    public String logDemo(HttpServletRequest request){
+	private final MyLogger myLogger;
+    
+	@RequestMapping("log-demo")
+	@ResponseBody
+	public String logDemo(HttpServletRequest request){
         String requestURL = request.getRequestURL().toString();
         myLogger.setRequestURL(requestURL);
         myLogger.log("controller test");
         logDemoService.logic("testId");
         return "OK";
-    }
+	}
 }
 ```
 
@@ -1557,14 +1543,15 @@ public class LogDemoController {
 @Service
 @RequiredArgsConstructor
 public class LogDemoService {
-    private final MyLogger myLogger;
+	private final MyLogger myLogger;
+	
     public void logic(String id) {
-        myLogger.log("service id = " + id);
-    }
+		myLogger.log("service id = " + id);
+	}
 }
 ```
 
-- #### UUID는 유일한 고유의 ID라고 할 수 있다. 즉, UUID로 HTTP 요청을 구분할 수 있따.
+- #### UUID는 유일한 고유의 ID라고 할 수 있다. 즉, UUID로 HTTP 요청을 구분할 수 있다.
 
 - #### @Scope(value = "request")로 설정하여 빈이 HTTP 요청 당 하나씩 생성되며 HTTP 요청이 끝나는 시점에 소멸된다. 정확한 빈 생성 시점은 스프링 컨테이너 요청 시점이다.
 
@@ -1588,18 +1575,17 @@ public class LogDemoService {
 @Controller
 @RequiredArgsConstructor
 public class LogDemoController {
-    private final LogDemoService logDemoService;
-    private final ObjectProvider<MyLogger> myLoggerProvider;
-    @RequestMapping("log-demo")	
-    @ResponseBody	
-    public String logDemo(HttpServletRequest request) {
-        String requestURL = request.getRequestURL().toString();
-        MyLogger myLogger = myLoggerProvider.getObject();
-        myLogger.setRequestURL(requestURL);
-        myLogger.log("controller test");
-        logDemoService.logic("testId");
-        return "OK";
-    }
+	private final LogDemoService logDemoService;
+	private final ObjectProvider<MyLogger> myLoggerProvider;
+	@RequestMapping("log-demo")
+	@ResponseBody
+	public String logDemo(HttpServletRequest request) {
+		String requestURL = request.getRequestURL().toString();
+		MyLogger myLogger = myLoggerProvider.getObject();
+		myLogger.setRequestURL(requestURL);myLogger.log("controller test");
+		logDemoService.logic("testId");
+		return "OK";
+	}
 }
 ```
 
@@ -1607,11 +1593,11 @@ public class LogDemoController {
 @Service
 @RequiredArgsConstructor
 public class LogDemoService {
-    private final ObjectProvider<MyLogger> myLoggerProvider;
-    public void logic(String id) {
-        MyLogger myLogger = myLoggerProvider.getObject();
-        myLogger.log("service id = " + id);
-    }
+	private final ObjectProvider<MyLogger> myLoggerProvider;
+	public void logic(String id) {
+		MyLogger myLogger = myLoggerProvider.getObject();
+		myLogger.log("service id = " + id);
+	}
 }
 ```
 
@@ -1626,9 +1612,7 @@ public class LogDemoService {
 
 
 ```java
-@Component
-@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
-public class MyLogger {}
+@Component@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)public class MyLogger {}
 ```
 
 - #### Proxy를 사용하여 이전의 오류가 발생하던 코드를 정상적으로 실행되게 만들 수 있다.
@@ -1641,7 +1625,7 @@ public class MyLogger {}
 
 
 
-![proxy](https://user-images.githubusercontent.com/79822924/139865812-774fec59-7ff2-4ec1-a78d-017133d83ddd.png)
+![proxy](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/proxy.png)
 
 - #### 프록시 객체는 요청이 오면 그때 내부에서 진짜 빈을 요청하는 위임 로직이 들어있다.
 
@@ -1653,7 +1637,7 @@ public class MyLogger {}
 
 - #### 다형성과 DI컨테이너의 장점은 단지 어노테이션 설정 변경만으로 원본 객체를 프록시 객체로 대체할 수 있다는 것이다.
 
-- #### 각 메소드들의 실행 시간을 알아볼때 프록시와 AOP를 사용하면 매우 편리하다
+- #### 각 메소드들의 실행 시간을 알아볼때 프록시와 AOP를 사용하면 매우 편리하다.
 
 
 
@@ -1668,8 +1652,6 @@ public class MyLogger {}
 - #### ctrl + alt + enter은 가르키는 곳 윗 부분에 새로운 줄을 생성한다
 
 - #### ctrl + shift + enter은 가르키는 곳 아래 부분에 새로운 줄을 생성한다.
-
-
 
 
 
