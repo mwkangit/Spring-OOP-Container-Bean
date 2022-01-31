@@ -155,3 +155,6 @@ MyLogger 클래스의 Scope를 request로 하여 요청이 발생했을 때 빈�
 
 
 ## More Explanation
+
+
+[Spring-OOP-Container-Bean-Note.md](https://github.com/mwkangit/Spring-OOP-Container-Bean/blob/master/Spring-OOP-Container-Bean-Note.md)
