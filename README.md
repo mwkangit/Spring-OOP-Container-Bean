@@ -140,13 +140,13 @@ MyLogger 클래스의 Scope를 request로 하여 요청이 발생했을 때 빈�
 
 - Scope - Prototype
 
-![Spring-OOP-Container-Bean1](/home/mwkang/Downloads/Spring-OOP-Container-Bean1.gif)
+![Spring-OOP-Container-Bean1](https://user-images.githubusercontent.com/79822924/151839034-73411510-fd8e-4ed8-aa72-44b33e8b030f.gif)
 
 
 
 - Bean - Lifecycle
 
-![Spring-OOP-Container-Bean2](/home/mwkang/Downloads/Spring-OOP-Container-Bean2.gif)
+![Spring-OOP-Container-Bean2](https://user-images.githubusercontent.com/79822924/151839065-230bd19c-e228-4ed3-b49d-cb1f7c152146.gif)
 
 
 
