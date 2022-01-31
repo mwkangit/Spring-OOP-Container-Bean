@@ -28,9 +28,9 @@
 
 - ### 다형성과 SOLID를 반영하기 위해 각 객체는 인터페이스로 형성 후 상속하여 클래스로 구현한다.
 
-![Member Domain Relation](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Member Domain Relation.png)
+![Member Domain Relation](https://user-images.githubusercontent.com/79822924/151839411-d142cb87-2a41-474d-bdfe-401ff934ae38.png)
 
-![Member Class Diagram](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Member Class Diagram.png)
+![Member Class Diagram](https://user-images.githubusercontent.com/79822924/151839425-df0750a0-f11c-4c03-a897-c951cb46ca41.png)
 
 - #### Member 도메인과 클래스 다이어그램을 통해 member의 다형성을 확보하기 위해 여러개의 인터페이스와 클래스로 나누었다.
 
@@ -121,9 +121,9 @@ public class MemberServiceImpl implements MemberService{
 
 
 
-![Order Domain](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Order Domain.png)
+![Order Domain](https://user-images.githubusercontent.com/79822924/151839457-72d7b6d3-d2bf-4c6d-b214-e9197098a701.png)
 
-![Order Class Diagram](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/Order Class Diagram.png)
+![Order Class Diagram](https://user-images.githubusercontent.com/79822924/151839472-e85e3817-8c40-4742-bfe1-0e36cb75e156.png)
 
 - #### Order 도메인과 클래스 다이어그램을 통해 사용할 메소드를 지정하여 다형성을 확보하였다.
 
@@ -249,7 +249,7 @@ public class RateDiscountPolicy implements DiscountPolicy {
 
 
 
-![DIP, OCP 불충분](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/DIP, OCP 불충분.png)
+![DIP, OCP 불충분](https://user-images.githubusercontent.com/79822924/151839500-48873bb6-25ed-4512-9d38-c9daa74b6e16.png)
 
 ```java
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -285,7 +285,7 @@ public class RateDiscountPolicy implements DiscountPolicy {
 
 
 
-![AppConfig 생성자 주입](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/AppConfig 생성자 주입.png)
+![AppConfig 생성자 주입](https://user-images.githubusercontent.com/79822924/151839521-6c9c534a-141c-4390-a34b-c66d91d1a111.png)
 
 ```java
 public class AppConfig {
@@ -357,7 +357,7 @@ public class OrderServiceImpl implements OrderService{
 
 - #### Config 클래스 또한 refactoring하여 역할에 따른 구현이 잘 보일 수 있게 해야한다.(중복 제거 후 변경에 용이하게 한다)
 
-![사용, 구성 영역](/media/mwkang/Klevv/Spring 일지/스프링 기본/09.30/사용, 구성 영역.png)
+![사용, 구성 영역](https://user-images.githubusercontent.com/79822924/151839564-3e93de40-491c-42ab-98b2-595eb7d64f8f.png)
 
 - #### AppConfig로 application이 사용 영역과 객체를 생성하고 구성하는 영역으로 분리되었다.
 
@@ -502,7 +502,7 @@ public class OrderApp {
 
 
 
-![스프링빈등록](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/스프링빈등록.png)
+![스프링빈등록](https://user-images.githubusercontent.com/79822924/151839625-90637792-dd80-41ca-a3a1-f7b04e929311.png)
 
 - #### 형성된 스프링 컨테이너에 key, value형태로 빈을 등록한다.
 
@@ -512,7 +512,7 @@ public class OrderApp {
 
 
 
-![스프링빈의존관계완료](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/스프링빈의존관계완료.png)
+![스프링빈의존관계완료](https://user-images.githubusercontent.com/79822924/151839644-bfcadc26-445d-4ca5-a25f-b1ff87922ba8.png)
 
 - #### 스프링 컨테이너는 설정 정보를 참고하여 의존관계(DI)를 주입한다.
 
@@ -556,13 +556,13 @@ public class OrderApp {
 
 
 
-![ApplicationContext설정사용](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/ApplicationContext설정사용.png)
+![ApplicationContext설정사용](https://user-images.githubusercontent.com/79822924/151839668-e7edfae4-89a2-4e61-95ab-592df16c0a52.png)
 
 - #### ApplicationContext에 java, XML, 임의로 제작한 설정을 사용하여 빈 등록을 하여 이용할 수 있다.
 
 
 
-![BeanDefinition](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/BeanDefinition.png)
+![BeanDefinition](https://user-images.githubusercontent.com/79822924/151839682-a3603aa8-33f9-4be2-8a5f-3ccd8809cf58.png)
 
 - #### 스프링 컨테이너는 BeanDefinition을 통해 메타정보를 기반으로 스프링 빈을 생성한다. 스프링 컨테이너는 BeanDefinition을 상속받아서 역할과 구현을 나눴다. 즉, 스프링 컨테이너는 설정정보가 java인지 XML인지 알 필요없이 BeanDefinition을 통해 정보를 인지하면 된다.
 
@@ -729,7 +729,7 @@ public class OrderServiceImpl implements OrderService{
 
 
 
-![Autowired](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.16/Autowired.png)
+![Autowired](https://user-images.githubusercontent.com/79822924/151839701-f40fc415-7e37-4c4b-9c06-50ca74c09fcd.png)
 
 - #### @Autowired를 생성자에 지정하면 스프링 컨테이너가 자동으로 해당 스프링 빈을 찾아서 의존관계를 주입한다. 이때 기본 조회 전략은 타입이 같은 빈을 찾아서 주입하는 것이며 getBean(반환 클래스 타입)과 같은 의미이다.
 
@@ -1308,13 +1308,13 @@ static class LifeCycleConfig {
 
 
 
-![prototypebean1](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/prototypebean1.png)
+![prototypebean1](https://user-images.githubusercontent.com/79822924/151839750-e3c1ac97-969c-4424-96b9-aa370a325894.png)
 
 - #### 스프링 컨테이너는 요청한 빈에 대해 의존관계 주입, 초기화 단계까지 관리한다.
 
 
 
-![prototypebean2](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/prototypebean2.png)
+![prototypebean2](https://user-images.githubusercontent.com/79822924/151839757-6d8dd079-6610-4399-a0bb-2d27e44d9b25.png)
 
 - #### 과정을 마친 빈을 client에 반환하지만 요청이 오면 항상 새로운 프로토타입 빈을 생성해서 반환한다.
 
@@ -1459,7 +1459,7 @@ implementation 'javax.inject:javax.inject:1'
 
 
 
-![web_scope](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/web_scope.png)
+![web_scope](https://user-images.githubusercontent.com/79822924/151839776-1a625211-7bc3-43d9-a68b-f322a0dedd8e.png)
 
 - #### 웹 스코프는 웹환경에서만 동작하며 스프링이 해당 스코프의 종료시점까지 관리하여 소멸 메소드가 호출된다.
 
@@ -1625,7 +1625,7 @@ public class LogDemoService {
 
 
 
-![proxy](/media/mwkang/Klevv/Spring 일지/스프링 기본/10.31/proxy.png)
+![proxy](https://user-images.githubusercontent.com/79822924/151839791-b5e85b0d-2d8b-4366-b46a-463961d689b9.png)
 
 - #### 프록시 객체는 요청이 오면 그때 내부에서 진짜 빈을 요청하는 위임 로직이 들어있다.
 
